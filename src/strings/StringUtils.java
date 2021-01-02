@@ -176,4 +176,22 @@ public class StringUtils {
 
 		return true;
 	}
+
+	public static String mostCommonWord(String paragraph, String[] banned) {
+		String[] words = paragraph.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", " ").split("\\s+");
+		Map<String, Integer> wordCount = new HashMap<>();
+		Set<String> bannedWords = new HashSet<>();
+
+		for (var word : banned) {
+			bannedWords.add(word);
+		}
+
+		for (var word : words) {
+			if (!bannedWords.contains(word)) {
+				wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+			}
+		}
+
+		return Collections.max(wordCount.entrySet(), Map.Entry.comparingByValue()).getKey();
+	}
 }

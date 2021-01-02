@@ -192,6 +192,14 @@ public class StringUtils {
 			}
 		}
 
-		return Collections.max(wordCount.entrySet(), Map.Entry.comparingByValue()).getKey();
+		int maxCount = 0;
+		String mostCommonWord = "";
+		for (var key : wordCount.keySet()) {
+			if (wordCount.get(key) > maxCount) {
+				maxCount = wordCount.get(key);
+				mostCommonWord = key;
+			}
+		}
+		return mostCommonWord;
 	}
 }
